@@ -1,0 +1,31 @@
+[package]
+name = "dnd_event_generator"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+color-eyre = "0.6.2"
+const_panic = "0.2"
+log = "0.4.22"
+rand = "^0.8"
+rayon = "1.8"
+rstest = "0.22.0"
+serde = "1.0.208"
+serde_derive = "1.0.208"
+serde_json5 = "0.1.0"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+enum_glob_use = "deny"
+pedantic = { level = "deny", priority = -1 }
+nursery = { level = "deny", priority = -1 }
+unwrap_used = "deny"
+
+[profile.release]
+opt-level = "z"   # Optimize for size.
+lto = true        # Enable Link Time Optimisation
+codegen-units = 1 # Reduced to increase optimisations.
+panic = "abort"   # Abort on panic
+strip = "symbols" # Strip symbols from binary
